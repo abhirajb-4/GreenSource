@@ -1,24 +1,24 @@
 // import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/HomePage";
-import Login from "./components/Login";
+import Home from "./pages/HomePage";
+import Login from "./pages/Login";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import Signup from "./components/Signup";
-import ConsumerDashboard from "./components/ConsumerDashboard";
-import FarmerDashboard from "./components/FarmerDashboard";
-import ProductsPage from "./components/ProductsPage";
-import CartPage from "./components/CartPage";
-import ConsumerProfilePage from "./components/ConsumerProfilePage";
-import ConsumerOrdersPage from "./components/ConsumerOrdersPage";
-import ConsumerSavedPage from "./components/ConsumerSavedPage";
-import MarketPage from "./components/MarketPage";
-import FarmerProducts from "./components/FarmerProducts";
-import FarmerOrdersPage from "./components/FarmerOrdersPage";
-import FarmerProfile from "./components/FarmerProfile";
-import FarmerEarnings from "./components/FarmerEarnings";
+import Signup from "./pages/Signup";
+import ConsumerDashboard from "./pages/ConsumerDashboard";
+import FarmerDashboard from "./pages/FarmerDashboard";
+import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
+import ConsumerProfilePage from "./pages/ConsumerProfilePage";
+import ConsumerOrdersPage from "./pages/ConsumerOrdersPage";
+import ConsumerSavedPage from "./pages/ConsumerSavedPage";
+import MarketPage from "./pages/MarketPage";
+import FarmerProducts from "./pages/FarmerProducts";
+import FarmerOrdersPage from "./pages/FarmerOrdersPage";
+import FarmerProfile from "./pages/FarmerProfile";
+import FarmerEarnings from "./pages/FarmerEarnings";
 //import { AuthPersistence } from "./store/slices/AuthPersistence";
-import OrderDetailsPage from "./components/OrderDetailsPage";
+import OrderDetailsPage from "./pages/OrderDetailsPage";
 
 function App() {
   return (
