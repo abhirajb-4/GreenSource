@@ -74,7 +74,7 @@ export default function CompletedDeliveryPage() {
 
   return (
     <div className="p-4 sm:p-6 md:p-8">
-      <h1 className="text-2xl font-bold mb-6">Active Deliveries</h1>
+      <h1 className="text-2xl font-bold mb-6">Completed Deliveries</h1>
 
       {deliveries.length === 0 ? (
         <p className="text-gray-600">No active deliveries found</p>
