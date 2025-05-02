@@ -134,7 +134,7 @@ const Signup = () => {
           },
         }
       );
-      console.log('auth farmer = ',response);
+      
       let responseData;
       if (userType === "farmer") {
         responseData = await axios.post(
@@ -159,6 +159,7 @@ const Signup = () => {
         console.log('Address',formData.address);
         console.log('Farmer data = ',responseData);
       } else {
+        console.log('Customer data = ', formData.phone);
         responseData = await axios.post(
           "http://localhost:3806/api/customers",
           {
@@ -328,34 +329,32 @@ const Signup = () => {
               )}
             </div>
 
-            {(userType === "farmer" || formData.phone) && (
-              <div className="transform transition-all duration-200 hover:translate-x-1">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone Number {userType === "farmer" && "*"}
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required={userType === "farmer"}
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className={`mt-1 w-full px-3 py-1.5 bg-gradient-to-r from-blue-50 to-green-50 border ${
-                    validationErrors.phone
-                      ? "border-red-500"
-                      : "border-blue-200"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200`}
-                />
-                {validationErrors.phone && (
-                  <p className="mt-1 text-xs text-red-500">
-                    {validationErrors.phone}
-                  </p>
-                )}
-              </div>
-            )}
+            <div className="transform transition-all duration-200 hover:translate-x-1">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Phone Number *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required  // Required for both
+                value={formData.phone}
+                onChange={handleInputChange}
+                className={`mt-1 w-full px-3 py-1.5 bg-gradient-to-r from-blue-50 to-green-50 border ${
+                  validationErrors.phone
+                    ? "border-red-500"
+                    : "border-blue-200"
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200`}
+              />
+              {validationErrors.phone && (
+                <p className="mt-1 text-xs text-red-500">
+                  {validationErrors.phone}
+                </p>
+              )}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="transform transition-all duration-200 hover:translate-x-1">

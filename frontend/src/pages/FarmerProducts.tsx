@@ -420,7 +420,7 @@ export default function FarmerProducts() {
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-6 bg-white border-t">
+          <div className="relative bottom-0 left-0 right-0 p-6 bg-white border-t">
             <div className="flex justify-end gap-4">
               <button
                 type="button"

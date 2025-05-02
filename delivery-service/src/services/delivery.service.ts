@@ -49,12 +49,22 @@ class DeliveryService {
     pickupLocation: { address: string };
     deliveryLocation: { address: string };
   }): Promise<IDelivery> {
-    const delivery = new Delivery({
-      ...deliveryData,
-      status: "CONFIRMED",
-    });
-    await delivery.save();
-    return delivery;
+    try {
+      
+     
+  
+      const delivery = new Delivery({
+        ...deliveryData,
+        status: "CONFIRMED",
+      });
+      console.log('data ready to save = ',delivery);
+      const savedDelivery = await delivery.save();
+      return savedDelivery;
+    } catch (error) {
+      console.error('Delivery creation failed:', error);
+      // Make sure to rethrow the error or return a rejected promise
+      throw error; // This ensures we maintain the Promise<IDelivery> return type
+    }
   }
 
   async updateDeliveryStatus(

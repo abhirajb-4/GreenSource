@@ -96,7 +96,7 @@ export default function FarmerOrdersPage() {
 
     // Prepare delivery data
     const deliveryData = await prepareDeliveryData(order);
-    
+    console.log('delivery data',deliveryData);
     // Create delivery entry
     await axios.post(
       "http://localhost:3800/api/delivery", 

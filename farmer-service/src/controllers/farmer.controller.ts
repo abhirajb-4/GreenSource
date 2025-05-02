@@ -6,7 +6,6 @@ import axios from "axios";
 // Create a new Farmer
 export const createFarmer = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     // Step 1: Create addresses
     const addressData = req.body.addresses; // Assuming addresses data is in req.body.addresses
     const addressDocs = await Address.insertMany(addressData);
@@ -17,7 +16,6 @@ export const createFarmer = async (req: Request, res: Response) => {
       addresses: addressIds, // Associate address IDs with the Farmer
     };
     const farmer = new Farmer(farmerData);
-    //console.log(farmer);
     await farmer.save();
     res.status(201).json(farmer);
   } catch (error) {
@@ -485,9 +483,7 @@ export const updateFarmerRole = async (req: Request, res: Response) => {
 
 export const loginFarmer = async (req: Request, res: Response) => {
   try {
-    console.log('farmerlogin');
     const farmer = await Farmer.findOne({ email: req.body.email });
-    console.log('login',farmer);
     if (!farmer) {
       res.status(400).json({ message: "Farmer not found" });
     } else {
