@@ -27,7 +27,7 @@ export default function ActiveDeliveryPage() {
         );
         console.log(agent);
         const response = await axios.get(
-          `http://localhost:3800/api/delivery/agents/${agent?.data?._id}/deliveries`,
+          `http://localhost:3800/api/delivery/agents/${agent?.data?._id}/activeDeliveries`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

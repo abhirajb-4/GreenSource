@@ -45,7 +45,6 @@ export default function OrderDetailsPage() {
     {}
   );
   const { token } = useSelector(selectAuth);
-  console.log(token, deliveryId);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -73,7 +72,6 @@ export default function OrderDetailsPage() {
           }
         );
         const orderData = await orderResponse.data;
-        console.log(orderData);
         setOrder(orderData);
 
         // Fetch delivery details from delivery service
@@ -112,7 +110,6 @@ export default function OrderDetailsPage() {
 
   const updateDeliveryStatus = async (statusUpdate: DeliveryStatusUpdate) => {
     try {
-      console.log("statusUpdate", statusUpdate);
       // Update delivery status
       const deliveryResponse = await axios.put(
         `http://localhost:3800/api/delivery/${delivery?._id}/status`,
@@ -232,7 +229,6 @@ export default function OrderDetailsPage() {
     );
   }
 
-  console.log(delivery, order);
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-8">
       <div className="max-w-6xl mx-auto px-4">

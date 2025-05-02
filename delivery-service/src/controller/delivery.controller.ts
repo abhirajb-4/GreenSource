@@ -54,10 +54,19 @@ class DeliveryController {
     }
   }
 
-  async getAgentDeliveries(req: Request, res: Response) {
+  async getAgentActiveDeliveries(req: Request, res: Response) {
     try {
       const { agentId } = req.params;
-      const deliveries = await deliveryService.getAgentDeliveries(agentId);
+      const deliveries = await deliveryService.getAgentActiveDeliveries(agentId);
+      res.json(deliveries);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  async getAgentCompletedDeliveries(req: Request, res: Response) {
+    try {
+      const { agentId } = req.params;
+      const deliveries = await deliveryService.getAgentCompletedDeliveries(agentId);
       res.json(deliveries);
     } catch (error: any) {
       res.status(500).json({ error: error.message });

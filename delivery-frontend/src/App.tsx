@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/HomePage";
+import Home from "./pages/HomePage";
 import Login from "./components/Login";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import DeliveryAgentDashboard from "./components/DeliveryAgentDashboard";
-import ActiveDeliveryPage from "./components/ActiveDeliveryPage";
-import OrderDetailsPage from "./components/OrderDetailsPage";
+import DeliveryAgentDashboard from "./pages/DeliveryAgentDashboard";
+import ActiveDeliveryPage from "./pages/ActiveDeliveryPage";
+import OrderDetailsPage from "./pages/OrderDetailsPage";
+import CompletedDeliveryPage from "./pages/CompletedDeliveryPage";
 
 function App() {
   return (
@@ -33,13 +34,13 @@ function App() {
           <Route
             path="/delivery/active"
             element={
-              <DeliveryAgentDashboard children={<>Active Deliveries</>} />
+              <DeliveryAgentDashboard children={<ActiveDeliveryPage/>} />
             }
           />
           <Route
             path="/delivery/completed"
             element={
-              <DeliveryAgentDashboard children={<>Completed Deliveries</>} />
+              <DeliveryAgentDashboard children={<CompletedDeliveryPage/>} />
             }
           />
           <Route

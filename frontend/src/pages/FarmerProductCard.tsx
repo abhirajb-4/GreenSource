@@ -3,7 +3,7 @@ import { IProduct } from "../types/Product";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectAuth } from "../store/slices/authSlice";
-import { Edit, Delete, Trash2, Edit2 } from "lucide-react";
+import {  Trash2, Edit2 } from "lucide-react";
 
 interface FarmerProductCardProps {
   product: IProduct;
@@ -12,7 +12,7 @@ interface FarmerProductCardProps {
 
 const FarmerProductCard: React.FC<FarmerProductCardProps> = ({
   product,
-  onProductUpdate,
+  onProductUpdate ,
 }) => {
   const { user, token } = useSelector(selectAuth);
   const [productImage, setProductImages] = useState<string>();

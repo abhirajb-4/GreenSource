@@ -151,9 +151,19 @@ class DeliveryService {
     return DeliveryAgent.find({ serviceLocations: { $in: serviceLocations } });
   }
 
-  async getAgentDeliveries(agentId: string): Promise<IDelivery[]> {
-    return Delivery.find({ deliveryAgentId: agentId });
+  async getAgentActiveDeliveries(agentId: string): Promise<IDelivery[]> {
+    return Delivery.find({
+      deliveryAgentId: agentId,
+      status: { $ne: 'DELIVERED' }
+    });
   }
+  async getAgentCompletedDeliveries(agentId: string): Promise<IDelivery[]> {
+    return Delivery.find({
+      deliveryAgentId: agentId,
+      status: { $eq: 'DELIVERED' }
+    });
+  }
+  
 
   async getDeliveryAgentById(agentId: string): Promise<IDeliveryAgent | null> {
     return DeliveryAgent.findById(agentId);
