@@ -16,6 +16,13 @@ router.get("/agents/:agentId", async (req: Request, res: Response) => {
 router.get("/agent/email/:email", async (req: Request, res: Response) => {
   await deliveryController.getDeliveryAgentByEmail(req, res);
 });
+
+router.get(
+  "/agents/:agentId/deliveries",
+  async (req: Request, res: Response) => {
+    await deliveryController.getAgentDeliveries(req, res);
+  }
+);
 router.get(
   "/agents/:agentId/activeDeliveries",
   async (req: Request, res: Response) => {

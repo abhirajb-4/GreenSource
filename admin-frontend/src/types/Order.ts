@@ -15,7 +15,7 @@ export interface Order {
     street: string;
     city: string;
     state: string;
-    zipCode: string;
+    postal_code: string;
     country: string;
   };
 }

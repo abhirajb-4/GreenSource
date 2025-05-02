@@ -150,6 +150,11 @@ class DeliveryService {
   ): Promise<IDeliveryAgent[]> {
     return DeliveryAgent.find({ serviceLocations: { $in: serviceLocations } });
   }
+  async getAgentDeliveries(agentId: string): Promise<IDelivery[]> {
+    return Delivery.find({
+      deliveryAgentId: agentId,
+    });
+  }
 
   async getAgentActiveDeliveries(agentId: string): Promise<IDelivery[]> {
     return Delivery.find({

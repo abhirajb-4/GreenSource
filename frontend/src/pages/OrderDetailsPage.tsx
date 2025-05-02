@@ -221,7 +221,7 @@ export default function OrderDetailsPage() {
                 <p className="text-gray-600">{order.shippingAddress.street}</p>
                 <p className="text-gray-600">
                   {order.shippingAddress.city}, {order.shippingAddress.state}{" "}
-                  {order.shippingAddress.zipCode}
+                  {order.shippingAddress.postal_code}
                 </p>
               </div>
             </div>

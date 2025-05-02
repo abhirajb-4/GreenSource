@@ -26,7 +26,7 @@ const orderSchema = new Schema<IOrder>({
     street: String,
     city: String,
     state: String,
-    zipCode: String,
+    postal_code: String,
     country: String,
   },
   items: [

@@ -53,6 +53,15 @@ class DeliveryController {
       res.status(500).json({ error: error.message });
     }
   }
+  async getAgentDeliveries(req: Request, res: Response) {
+    try {
+      const { agentId } = req.params;
+      const deliveries = await deliveryService.getAgentDeliveries(agentId);
+      res.json(deliveries);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
   async getAgentActiveDeliveries(req: Request, res: Response) {
     try {

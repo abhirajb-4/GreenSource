@@ -206,7 +206,7 @@ const CartPage: React.FC = () => {
           street: selectedAddress.street,
           city: selectedAddress.city,
           state: selectedAddress.state,
-          zipCode: selectedAddress.zipCode,
+          postal_code: selectedAddress.postal_code,
           country: selectedAddress.country,
         },
         items: cartItems.map((item) => ({
@@ -283,7 +283,7 @@ const CartPage: React.FC = () => {
             >
               <p className="font-semibold">{address.street}</p>
               <p className="text-gray-600">
-                {address.city}, {address.state} {address.zipCode}
+                {address.city}, {address.state} {address.postal_code}
               </p>
               <p className="text-gray-600">{address.country}</p>
               {address.isDefault && (

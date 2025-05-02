@@ -183,7 +183,7 @@ export default function FarmerOrdersPage() {
   };
 
   const formatAddress = (addressData: any) => {
-    return `${addressData.street}, ${addressData.city}, ${addressData.state}, ${addressData.country}, ${addressData.zipcode}`;
+    return `${addressData.street}, ${addressData.city}, ${addressData.state}, ${addressData.country}, ${addressData.postal_code}`;
   };
 
   // Order Card Component

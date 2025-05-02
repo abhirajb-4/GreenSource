@@ -4,7 +4,7 @@ export interface Address {
   city: string;
   state: string;
   country: string;
-  zipCode: string;
+  postal_code: string;
   isDefault: boolean;
 }
 

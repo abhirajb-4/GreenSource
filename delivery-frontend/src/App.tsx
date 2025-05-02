@@ -7,6 +7,7 @@ import DeliveryAgentDashboard from "./pages/DeliveryAgentDashboard";
 import ActiveDeliveryPage from "./pages/ActiveDeliveryPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 import CompletedDeliveryPage from "./pages/CompletedDeliveryPage";
+import AgentProfile from "./pages/AgentProfilePage";
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
           />
           <Route
             path="/delivery/profile"
-            element={<DeliveryAgentDashboard children={<>My Profile</>} />}
+            element={<DeliveryAgentDashboard children={ <AgentProfile/>} />}
           />
         </Routes>
       </Provider>

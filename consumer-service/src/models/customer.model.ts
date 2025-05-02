@@ -7,7 +7,7 @@ const AddressSchema = new Schema<Address>(
     city: { type: String, required: true },
     state: { type: String, required: true },
     country: { type: String, required: true },
-    zipCode: { type: String, required: true },
+    postal_code: { type: String, required: true },
     isDefault: { type: Boolean, default: false },
   },
   { timestamps: true }
