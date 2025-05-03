@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { selectAuth } from "../store/slices/authSlice";
 import { Plus, X, Upload } from "lucide-react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface Farmer {
   email: string;
@@ -159,6 +160,7 @@ export default function FarmerProducts() {
         unit: "",
         category: undefined,
       });
+      // toast.success("Product added successfully!");
       setProductImages([]);
       setImageUrls([]);
       setUploadProgress(0);

@@ -258,11 +258,11 @@ export default function FarmerOrdersPage() {
                 <div className="flex justify-between items-center mt-2">
                   <div>
                     <p className="text-xs text-gray-500">Unit Price</p>
-                    <p className="font-medium text-sm">₹{item.unitPrice.toFixed(2)}</p>
+                    <p className="font-medium text-sm">${item.unitPrice.toFixed(2)}</p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Total</p>
-                    <p className="font-medium text-sm">₹{item.totalPrice.toFixed(2)}</p>
+                    <p className="font-medium text-sm">${item.totalPrice.toFixed(2)}</p>
                   </div>
                 </div>
               </div>

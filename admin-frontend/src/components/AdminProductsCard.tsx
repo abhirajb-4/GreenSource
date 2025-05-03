@@ -50,10 +50,10 @@ export default function AdminProductsCard({
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-medium text-green-600">
-                  ${product.currentPrice}/{product.unit}
+                ₹{product.currentPrice}/{product.unit}
                 </p>
                 <p className="text-xs text-gray-500">
-                  Base price: ${product.basePrice}/{product.unit}
+                  Base price: ₹{product.basePrice}/{product.unit}
                 </p>
               </div>
               <p className="text-gray-500">

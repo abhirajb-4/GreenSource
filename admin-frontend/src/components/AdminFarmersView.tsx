@@ -226,7 +226,7 @@ export default function AdminFarmersView() {
                   <p className="flex items-center gap-2">
                     <span className="font-medium">Total Earnings:</span>
                     <span className="text-green-600 font-medium">
-                      ${calculateTotalEarnings(farmer.orders || []).toFixed(2)}
+                    ₹{calculateTotalEarnings(farmer.orders || []).toFixed(2)}
                     </span>
                   </p>
                 </div>

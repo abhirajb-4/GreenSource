@@ -225,7 +225,7 @@ const FarmerProductCard: React.FC<FarmerProductCardProps> = ({
         </div>
         <div className="flex justify-between items-center mb-2">
           <span className="text-lg font-semibold text-blue-600">
-            ₹{editedProduct.currentPrice.toFixed(2)}
+          ₹{editedProduct.currentPrice.toFixed(2)}
           </span>
           <span className="text-xs text-gray-500">
             Category: {editedProduct.category}

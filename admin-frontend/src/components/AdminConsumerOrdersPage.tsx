@@ -125,10 +125,10 @@ export default function AdminConsumerOrdersPage() {
                       </div>
                       <div className="text-right">
                         <p className="font-medium">
-                          ₹{item.unitPrice.toFixed(2)}
+                          ${item.unitPrice.toFixed(2)}
                         </p>
                         <p className="text-sm text-gray-600">
-                          Total: ₹{item.totalPrice.toFixed(2)}
+                          Total: ${item.totalPrice.toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -137,7 +137,7 @@ export default function AdminConsumerOrdersPage() {
                     <div className="flex justify-between font-semibold">
                       <span>Total Amount</span>
                       <span className="text-lg">
-                        ₹{order.totalAmount.toFixed(2)}
+                        ${order.totalAmount.toFixed(2)}
                       </span>
                     </div>
                   </div>

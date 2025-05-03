@@ -212,13 +212,13 @@ export default function ConsumerOrdersPage() {
                   <div>
                     <p className="text-xs text-gray-500">Unit Price</p>
                     <p className="font-medium text-sm">
-                      ₹{item.unitPrice.toFixed(2)}
+                      ${item.unitPrice.toFixed(2)}
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Total</p>
                     <p className="font-medium text-sm">
-                      ₹{item.totalPrice.toFixed(2)}
+                      ${item.totalPrice.toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default function ConsumerOrdersPage() {
           <div className="flex justify-between items-center mb-4">
             <span className="font-semibold text-sm">Total Amount:</span>
             <span className="font-bold text-base">
-              ₹{order.totalAmount.toFixed(2)}
+              ${order.totalAmount.toFixed(2)}
             </span>
           </div>
 

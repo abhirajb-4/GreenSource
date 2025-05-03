@@ -19,6 +19,9 @@ import FarmerProfile from "./pages/FarmerProfile";
 import FarmerEarnings from "./pages/FarmerEarnings";
 //import { AuthPersistence } from "./store/slices/AuthPersistence";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   return (
@@ -135,6 +138,7 @@ function App() {
             }
           />
         </Routes>
+        <ToastContainer />
       </Provider>
     </>
   );
