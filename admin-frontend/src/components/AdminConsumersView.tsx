@@ -204,7 +204,7 @@ export default function AdminConsumersView() {
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="font-medium">${order.totalAmount}</p>
+                            <p className="font-medium">₹{order.totalAmount}</p>
                             <span
                               className={`text-xs px-2 py-1 rounded-full ${
                                 order.status === "DELIVERED"

@@ -292,7 +292,7 @@ export default function AdminFarmersView() {
                       >
                         <p className="font-medium">{product.name}</p>
                         <p className="text-gray-600">
-                          Price: ${product.currentPrice}
+                          Price: ₹{product.currentPrice}
                         </p>
                       </div>
                     ))
@@ -344,7 +344,7 @@ export default function AdminFarmersView() {
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="font-medium">${order.totalAmount}</p>
+                            <p className="font-medium">₹{order.totalAmount}</p>
                             <p className="text-xs">{order.status}</p>
                           </div>
                         </div>

@@ -177,9 +177,9 @@ export default function AdminAnalytics() {
           <div className="space-y-2">
             <p>Total Orders: {analytics.orders.total}</p>
             <p>Delivered Orders: {analytics.orders.delivered}</p>
-            <p>Total Revenue: ${analytics.orders.totalRevenue.toFixed(2)}</p>
+            <p>Total Revenue: ₹{analytics.orders.totalRevenue.toFixed(2)}</p>
             <p className="text-green-600 font-semibold">
-              Company Revenue: ${analytics.orders.adminCommission.toFixed(2)}
+              Company Revenue: ₹{analytics.orders.adminCommission.toFixed(2)}
             </p>
           </div>
         </div>
