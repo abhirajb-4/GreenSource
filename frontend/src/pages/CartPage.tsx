@@ -328,7 +328,7 @@ const CartPage: React.FC = () => {
                 <h3 className="text-lg font-semibold">{item.name}</h3>
                 <p className="text-gray-600">{item.description}</p>
                 <p className="text-sm text-gray-500">
-                  ${item.currentPrice.toFixed(2)} / {item.unit}
+                ₹{item.currentPrice.toFixed(2)} / {item.unit}
                 </p>
                 {stockErrors.find((error) => error.productId === item._id) && (
                   <p className="text-red-500 text-sm">
@@ -362,7 +362,7 @@ const CartPage: React.FC = () => {
                 </div>
 
                 <p className="font-semibold min-w-[80px] text-right">
-                  ${(item.currentPrice * item.quantity).toFixed(2)}
+                ₹{(item.currentPrice * item.quantity).toFixed(2)}
                 </p>
 
                 <button
@@ -382,7 +382,7 @@ const CartPage: React.FC = () => {
             <div className="flex justify-between items-center">
               <span className="text-xl font-semibold">Total:</span>
               <span className="text-2xl font-bold">
-                ${totalAmount.toFixed(2)}
+              ₹{totalAmount.toFixed(2)}
               </span>
             </div>
 
