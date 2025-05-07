@@ -11,7 +11,7 @@ import { selectAuth } from "../store/slices/authSlice";
 import axios from "axios";
 import { Address } from "../types/Customer";
 import { IOrder, OrderStatus } from "../types/Order";
-
+import { forEach } from "lodash";
 
 interface ICartItem {
   productId: string;
@@ -194,63 +194,51 @@ const CartPage: React.FC = () => {
       setError("Please select a delivery address");
       return;
     }
+    console.log('cart item');
+    console.log(cartItems);
+
+    const farmerEmails = [...new Set(cartItems.map(item => item.farmerId))];
+    console.log(farmerEmails);
+    
     try {
       setLoading(true);
 
-      // Group cart items by farmerId
-  const groupedByFarmer: { [farmerId: string]: typeof cartItems } = {};
-  cartItems.forEach((item) => {
-    if (!groupedByFarmer[item.farmerId]) {
-      groupedByFarmer[item.farmerId] = [];
-    }
-    groupedByFarmer[item.farmerId].push(item);
-  });
-
-  // Loop through each group and create order
-  for (const [farmerId, items] of Object.entries(groupedByFarmer)) {
-    const orderItems = items.map((item) => ({
-      productId: item._id,
-      quantity: item.quantity,
-      unitPrice: item.currentPrice,
-      totalPrice: item.currentPrice * item.quantity,
-    }));
-
-    const totalAmount = orderItems.reduce((sum, item) => sum + item.totalPrice, 0);
-
-    const orderData: Omit<IOrder, '_id'> = {
-      consumerId: user.email!,
-      farmerId,
-      status: OrderStatus.PENDING,
-      totalAmount,
-      shippingAddress: {
-        street: selectedAddress.street,
-        city: selectedAddress.city,
-        state: selectedAddress.state,
-        postal_code: selectedAddress.postal_code,
-        country: selectedAddress.country,
-      },
-      items: orderItems,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    console.log('order data ');
-    console.log(orderData);
-    const orderResponse = await createOrder(token!, orderData);
-    const orderId = orderResponse.data._id;
-    // Add order ID to customer's orders
-    await axios.post(
-      `http://localhost:3800/api/customers/api/customers/${user.email}/orders`,
-      { orderId },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const orderData: Omit<IOrder, '_id'> = {
+        consumerId: user.email!,
+        farmerId: cartItems[0].farmerId,
+        status: OrderStatus.PENDING,
+        totalAmount,
+        shippingAddress: {
+          street: selectedAddress.street,
+          city: selectedAddress.city,
+          state: selectedAddress.state,
+          postal_code: selectedAddress.postal_code,
+          country: selectedAddress.country,
         },
-      }
-    );
+        items: cartItems.map((item) => ({
+          productId: item._id,
+          quantity: item.quantity,
+          unitPrice: item.currentPrice,
+          totalPrice: item.currentPrice * item.quantity,
+        })),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
-  }
+      // Create order
+      const orderResponse = await createOrder(token!, orderData);
+      const orderId = orderResponse.data._id;
 
-      
+      // Add order ID to customer's orders
+      await axios.post(
+        `http://localhost:3800/api/customers/api/customers/${user.email}/orders`,
+        { orderId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       // Clear cart in customer service
       await axios.delete(
@@ -373,7 +361,7 @@ const CartPage: React.FC = () => {
                   <button
                     className="px-3 py-1 hover:bg-gray-100"
                     onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                    disabled={loading || item.quantity >= item.stock}
+                    disabled={loading}
                   >
                     +
                   </button>

@@ -20,7 +20,8 @@ const ProductsPage: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProducts(token || "");
+        const allData = await getProducts(token || "");
+        const data = allData.filter((item: { quantityAvailable: number; }) => item.quantityAvailable > 0);
         setProducts(data);
         setLoading(false);
       } catch (err: unknown) {
