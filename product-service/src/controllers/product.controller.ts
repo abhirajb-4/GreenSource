@@ -12,6 +12,9 @@ export class ProductController {
   async listProducts(req: Request, res: Response) {
     try {
       const products = await this.productService.listProducts(req.query);
+      // console.log('PRODUCTS ')
+      // console.log(products);
+      // console.log(products.length);
       res.json(products);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch products" });

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { selectAuth } from "../store/slices/authSlice";
 import { Plus, X, Upload } from "lucide-react";
 import axios from "axios";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 
 interface Farmer {
   email: string;
@@ -21,6 +21,8 @@ interface Farmer {
 }
 
 export default function FarmerProducts() {
+
+  const [validationError, setValidationError] = useState<string | null>(null);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -116,7 +118,14 @@ export default function FarmerProducts() {
 
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
+     // Validate minQuantityToOrder
+     if (newProduct.minQuantityToOrder && newProduct.quantityAvailable && 
+      newProduct.minQuantityToOrder > newProduct.quantityAvailable) {
+      setValidationError("Minimum order quantity cannot be greater than available quantity");
+      return;
+    }
     try {
+      setValidationError(null);
       setLoading(true);
 
       // First create the product
@@ -373,6 +382,35 @@ export default function FarmerProducts() {
                   className="border p-2 rounded"
                   required
                 />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label
+                  htmlFor="minQuantity"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Minimum quantity to make order
+                </label>
+                <input
+                  id="minQuantity"
+                  type="number"
+                  placeholder="Enter minimum quantity to make order"
+                  value={newProduct.minQuantityToOrder}
+                  onChange={(e) => {
+                    const minQuantity = Number(e.target.value);
+                    setNewProduct({
+                      ...newProduct,
+                      minQuantityToOrder: minQuantity,
+                    });
+                    // Clear validation error when min quantity changes
+                    if (validationError) setValidationError(null);
+                  }}
+                  className="border p-2 rounded"
+                  required
+                  min="1"
+                />
+                {validationError && (
+                  <p className="text-red-500 text-sm mt-1">{validationError}</p>
+                )}
               </div>
               <div className="flex flex-col gap-1">
                 <label

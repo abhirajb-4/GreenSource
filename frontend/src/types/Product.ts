@@ -15,6 +15,7 @@ export interface IProduct {
   basePrice: number;
   currentPrice: number;
   quantityAvailable: number;
+  minQuantityToOrder:number;
   unit: string;
   category: ProductCategory;
   isActive: boolean;

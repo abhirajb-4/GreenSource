@@ -22,6 +22,7 @@ interface IProduct {
   basePrice: number;
   currentPrice: number;
   quantityAvailable: number;
+  minQuantityToOrder:number;
   unit: string;
   category: ProductCategory;
   isActive: boolean;
@@ -144,6 +145,9 @@ export default function AdminFarmerProductsPage() {
                     </div>
                     <p className="text-gray-500">
                       Stock: {product.quantityAvailable} {product.unit}s
+                    </p>
+                    <p className="text-gray-500">
+                      Stock: {product.minQuantityToOrder} {product.unit}s
                     </p>
                   </div>
                 </div>

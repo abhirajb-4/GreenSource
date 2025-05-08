@@ -47,7 +47,8 @@ export default function AdminFarmersView() {
           },
         }
       );
-
+      console.log("response");
+      console.log(response.data);
       const farmersWithDetails = await Promise.all(
         response.data.map(async (farmer: Farmer) => {
           const [productsRes, ordersRes] = await Promise.all([

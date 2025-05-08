@@ -59,6 +59,7 @@ export default function AdminProductsCard({
               <p className="text-gray-500">
                 Stock: {product.quantityAvailable} {product.unit}s
               </p>
+              
             </div>
           </div>
 

@@ -7,6 +7,7 @@ import { selectAuth } from "../store/slices/authSlice";
 import { Frown, Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../store/slices/wishlistSlice";
+import axios from "axios";
 
 const ProductsPage: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -14,14 +15,30 @@ const ProductsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { token } = useSelector(selectAuth);
+  const { token,user } = useSelector(selectAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const allData = await getProducts(token || "");
+        const userDataResponse =  await axios.get(
+          `http://localhost:3800/api/customers/api/customers/${user.email}/postalcode`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const userPincode = userDataResponse.data.data;
+        console.log('USER PINCODE = ',userPincode);
         const data = allData.filter((item: { quantityAvailable: number; }) => item.quantityAvailable > 0);
+        // Extract unique farmer emails
+       // Extract unique farmer emails
+        const uniqueFarmerEmails = [...new Set(data.map((item: { farmerId: string; }) => item.farmerId))];
+        
+        
         setProducts(data);
         setLoading(false);
       } catch (err: unknown) {

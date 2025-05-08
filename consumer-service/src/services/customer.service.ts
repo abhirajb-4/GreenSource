@@ -5,6 +5,7 @@ import { AppError } from "../types/error";
 import { IOrder } from "../types/order";
 
 export class CustomerService {
+  
   async getAllCustomers(
     page: number = 1,
     limit: number = 10
@@ -255,4 +256,15 @@ export class CustomerService {
     }
     return customer;
   }
+  async getPostalCode(email: string): Promise<string | null> {
+    const customer = await CustomerModel.findOne({ email })
+        .select('addresses')
+        .lean();
+    
+    // Find the default address first, otherwise return the first address
+    const defaultAddress = customer?.addresses?.find(addr => addr.isDefault);
+    const firstAddress = customer?.addresses?.[0];
+    
+    return defaultAddress?.postal_code || firstAddress?.postal_code || null;
+}
 }
