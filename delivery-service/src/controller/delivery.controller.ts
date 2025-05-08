@@ -23,7 +23,7 @@ class DeliveryController {
       }
 
       // Validate vehicle type
-      if (!["bike", "van", "truck"].includes(vehicle.type)) {
+      if (! ["bike" , "auto" , "mini-truck" , "medium-truck" , "heavy-truck"].includes(vehicle.type)) {
         return res.status(400).json({
           error: "Vehicle type must be either bike, van or truck",
         });

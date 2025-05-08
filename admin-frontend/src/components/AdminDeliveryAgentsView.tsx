@@ -17,7 +17,7 @@ interface DeliveryAgent {
     value: string;
   };
   vehicle: {
-    type: "bike" | "van" | "truck";
+    type: "bike" | "auto" | "mini-truck" | "medium-truck" | "heavy-truck";
     model: string;
     registrationId: string;
   };
@@ -55,7 +55,7 @@ export default function AdminDeliveryAgentsView() {
 
   useEffect(() => {
     fetchDeliveryAgents();
-  }, []);
+  }, [token]);
 
   const fetchDeliveryAgents = async () => {
     try {
@@ -103,6 +103,7 @@ export default function AdminDeliveryAgentsView() {
 
   const handleAddAgent = async () => {
     try {
+      console.log(newAgent);
       await axios.post("http://localhost:3800/api/delivery/agents", newAgent, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -133,7 +134,6 @@ export default function AdminDeliveryAgentsView() {
       setError("Failed to add delivery agent");
     }
   };
-  console.log(deliveryAgents)
 
   const handleDeleteAgent = async (agentId: string) => {
     try {
@@ -342,15 +342,17 @@ export default function AdminDeliveryAgentsView() {
                     ...newAgent,
                     vehicle: {
                       ...newAgent.vehicle!,
-                      type: e.target.value as "bike" | "van" | "truck",
+                      type: e.target.value as "bike" | "auto" | "mini-truck" | "medium-truck" | "heavy-truck",
                     },
                   })
                 }
               >
                 <option value="">Select Vehicle Type</option>
                 <option value="bike">Bike</option>
-                <option value="van">Van</option>
-                <option value="truck">Truck</option>
+                <option value="auto">Auto</option>
+                <option value="mini-truck">Mini truck</option>
+                <option value="medium-truck">Medium truck</option>
+                <option value="heavy-truck">Heavy truck</option>
               </select>
               <input
                 type="text"
