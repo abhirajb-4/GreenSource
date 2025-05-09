@@ -155,6 +155,22 @@ const FarmerProductCard: React.FC<FarmerProductCardProps> = ({
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
+            Minimum quantity to make order
+            </label>
+            <input
+              type="number"
+              value={editedProduct.minQuantityToOrder}
+              onChange={(e) =>
+                setEditedProduct({
+                  ...editedProduct,
+                  minQuantityToOrder: parseInt(e.target.value),
+                })
+              }
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
               Unit
             </label>
             <input

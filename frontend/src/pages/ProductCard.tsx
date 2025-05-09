@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setWishlist(response.data.data.wishlist);
       } catch (error) {
         console.error("Error fetching wishlist:", error);

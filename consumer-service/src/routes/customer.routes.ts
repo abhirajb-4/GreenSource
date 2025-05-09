@@ -40,4 +40,7 @@ router.delete(
   customerController.removeFromWishlist
 );
 
+//get pincode
+router.get("/:email/postalcode", customerController.getPostalCode);
+
 export default router;

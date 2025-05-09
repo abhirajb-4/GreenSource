@@ -13,7 +13,7 @@ export interface IDeliveryAgent {
     value: string;
   };
   vehicle: {
-    type: "bike" | "van" | "truck";
+    type: "bike" | "auto" | "mini-truck" | "medium-truck" | "heavy-truck";
     model: string;
     registrationId: string;
   };
@@ -72,7 +72,7 @@ const DeliveryAgentSchema = new Schema(
       type: {
         type: String,
         required: true,
-        enum: ["bike", "van", "truck"],
+        enum: ["bike" , "auto" , "mini-truck" , "medium-truck" , "heavy-truck"],
       },
       model: {
         type: String,

@@ -4,6 +4,7 @@ import axios from "axios";
 import { selectAuth } from "../store/slices/authSlice";
 import { IOrder, OrderStatus } from "../types/Order";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Order extends IOrder {
   _id: string;
@@ -57,13 +58,15 @@ export default function FarmerOrdersPage() {
       const order = await getOrderDetails(orderId);
 
       if (status === OrderStatus.CONFIRMED) {
-        await processOrderConfirmation(order);
+        const orderStatus = await processOrderConfirmation(order);
+        if(orderStatus == true){
+          await updateOrderStatus(orderId, status);
+        }
       } 
       else if (status === OrderStatus.CANCELLED && order.status === OrderStatus.CONFIRMED) {
         await processOrderCancellation(order);
       }
-
-      await updateOrderStatus(orderId, status);
+      
       fetchOrders();
     } catch (error) {
       setError("Failed to update order status");
@@ -89,14 +92,19 @@ export default function FarmerOrdersPage() {
   };
 
   const processOrderConfirmation = async (order: Order) => {
-    // Decrease product quantities
-    for (const item of order.items) {
-      await adjustProductQuantity(item.productId, -item.quantity);
-    }
+   
 
     // Prepare delivery data
     const deliveryData = await prepareDeliveryData(order);
     console.log('delivery data',deliveryData);
+    if(!deliveryData.deliveryAgentId){
+      toast.error("No delivery agent available");
+      return false;
+    }
+     // Decrease product quantities
+     for (const item of order.items) {
+      await adjustProductQuantity(item.productId, -item.quantity);
+    }
     // Create delivery entry
     await axios.post(
       "http://localhost:3800/api/delivery", 
@@ -109,6 +117,7 @@ export default function FarmerOrdersPage() {
       await axios.put(
         `http://localhost:3809/agents/${deliveryData.deliveryAgentId}/orderCount/increase`
       );
+      return true;
     }
   };
 

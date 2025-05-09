@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { toast } from "react-toastify";
+ import { toast } from "react-toastify";
 import { loginStart, loginFailure } from "../store/slices/authSlice";
 import axios, { AxiosResponse } from "axios";
 import type { RootState } from "../store";
@@ -119,9 +119,9 @@ const Login = () => {
           type: "auth/loginSuccess",
           payload: response.data,
         });
-        //  toast.success("Logged in successfully!", {
-        //   position: "bottom-center"
-        // });
+          toast.success("Logged in successfully!", {
+          position: "bottom-center"
+        });
         if (formData.userType === "consumer") {     
           navigate("/consumer/products");
         } else {

@@ -10,11 +10,13 @@ export interface IProduct {
   _id: string;
   farmerId: string;
   farmerName: string;
+  farmerPostalCode: string;
   name: string;
   description: string;
   basePrice: number;
   currentPrice: number;
   quantityAvailable: number;
+  minQuantityToOrder:number;
   unit: string;
   category: ProductCategory;
   isActive: boolean;

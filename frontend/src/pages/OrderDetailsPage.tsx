@@ -29,7 +29,7 @@ interface IDeliveryAgent {
     value: string;
   };
   vehicle: {
-    type: "bike" | "van" | "truck";
+    type: "bike" | "auto" | "mini-truck" | "medium-truck" | "heavy-truck";
     model: string;
     registrationId: string;
   };

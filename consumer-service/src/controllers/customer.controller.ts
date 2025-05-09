@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { CustomerService } from "../services/customer.service";
 
 export class CustomerController {
+  
   private customerService: CustomerService;
 
   constructor() {
@@ -273,4 +274,17 @@ export class CustomerController {
       next(error);
     }
   };
+  getPostalCode = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const postalcode = await this.customerService.getPostalCode(req.params.email);
+        console.log(postalcode);
+        res.json({ 
+            success: true, 
+            data: postalcode 
+        });
+        
+    } catch (error) {
+        next(error);
+    }
+};
 }

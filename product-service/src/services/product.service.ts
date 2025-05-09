@@ -5,6 +5,7 @@ import { IProduct, IProductImage, IReview } from "../types/product.types";
 
 export class ProductService {
   async listProducts(query: any = {}) {
+    
     return Product.find({ isActive: true, ...query });
   }
 
