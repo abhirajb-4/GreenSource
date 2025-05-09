@@ -193,9 +193,14 @@ const CartPage: React.FC = () => {
       setError("Please select a delivery address");
       return;
     }
+    if(cartItems.length > 0){
+      console.log('cart',cartItems);
+    }
 
     try {
       setLoading(true);
+
+
 
       const orderData: Omit<IOrder, '_id'> = {
         consumerId: user.email!,
