@@ -10,6 +10,7 @@ export interface IProduct {
   _id: string;
   farmerId: string;
   farmerName: string;
+  farmerPostalCode: string;
   name: string;
   description: string;
   basePrice: number;

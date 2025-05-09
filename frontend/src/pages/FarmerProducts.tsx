@@ -17,6 +17,7 @@ interface Farmer {
   firstName: string;
   lastName: string;
   phone: string;
+  postalCode: string;
   is_verified: boolean;
 }
 
@@ -39,6 +40,7 @@ export default function FarmerProducts() {
     quantityAvailable: 0,
     unit: "",
     category: undefined,
+    farmerPostalCode: "",
   });
 
   const { user, token } = useSelector(selectAuth);

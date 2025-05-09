@@ -23,6 +23,7 @@ interface IProduct {
   currentPrice: number;
   quantityAvailable: number;
   minQuantityToOrder:number;
+  farmerPostalCode:string;
   unit: string;
   category: ProductCategory;
   isActive: boolean;

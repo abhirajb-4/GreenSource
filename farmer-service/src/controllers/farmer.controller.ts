@@ -128,15 +128,14 @@ export const addProduct = async (req: Request, res: Response) => {
     // Include the farmer ID in the product data
 
     const farmer = await Farmer.findOne({ email: farmerId });
-
+    const address = await Address.findOne({ _id: farmer?.addresses[0] });
     const farmerName = farmer
       ? `${farmer.first_name} ${farmer.last_name}`
-      : null;
+      : null; 
 
     productData.farmerId = farmerId;
     productData.farmerName = farmerName;
-    
-
+    productData.farmerPostalCode = address?.postal_code ?? null;
     // Send POST request to product service
     const response = await axios.post("http://localhost:3807/", productData);
 

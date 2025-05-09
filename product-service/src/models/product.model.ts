@@ -10,6 +10,7 @@ const productSchema = new Schema<IProduct>({
   currentPrice: { type: Number, required: true },
   quantityAvailable: { type: Number, required: true },
   minQuantityToOrder: { type: Number, required: true },
+  farmerPostalCode: { type: String, required: true },
   unit: { type: String, required: true },
   category: { 
     type: String, 

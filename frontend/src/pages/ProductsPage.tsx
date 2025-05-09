@@ -22,7 +22,8 @@ const ProductsPage: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const allData = await getProducts(token || "");
-        const userDataResponse =  await axios.get(
+  
+        const userDataResponse = await axios.get(
           `http://localhost:3800/api/customers/api/customers/${user.email}/postalcode`,
           {
             headers: {
@@ -31,14 +32,55 @@ const ProductsPage: React.FC = () => {
             },
           }
         );
+  
         const userPincode = userDataResponse.data.data;
-        console.log('USER PINCODE = ',userPincode);
-        const data = allData.filter((item: { quantityAvailable: number; }) => item.quantityAvailable > 0);
-        // Extract unique farmer emails
-       // Extract unique farmer emails
-        const uniqueFarmerEmails = [...new Set(data.map((item: { farmerId: string; }) => item.farmerId))];
-        
-        
+        console.log("USER PINCODE = ", userPincode);
+  
+        const data = allData.filter(
+          (item: { quantityAvailable: number }) => item.quantityAvailable > 0
+        );
+  
+        // Step 1: Extract unique farmer pincodes
+        const uniqueFarmersMap = new Map<string, string>();
+        data.forEach((item: any) => {
+          if (!uniqueFarmersMap.has(item.farmerId)) {
+            uniqueFarmersMap.set(item.farmerId, item.farmerPostalCode);
+          }
+        });
+  
+        const uniqueFarmers = Array.from(uniqueFarmersMap, ([farmerId, farmerPostalCode]) => ({
+          farmerId,
+          farmerPostalCode,
+        }));
+  
+        // Step 2: Fetch distance for each unique farmer
+        const API_KEY = "d5668f60-29d8-11f0-b664-7566d958dde4";
+        const COUNTRY = "in";
+  
+        const farmerDistances = await Promise.all(
+          uniqueFarmers.map(async (farmer) => {
+            const url = `https://app.zipcodebase.com/api/v1/distance?apikey=${API_KEY}&code=${userPincode}&compare=${farmer.farmerPostalCode}&country=${COUNTRY}`;
+            try {
+              const res = await fetch(url);
+              const result = await res.json();
+              const distance = result.results[farmer.farmerPostalCode] ?? null;
+              return { ...farmer, distance };
+            } catch (err) {
+              console.error(`Failed to fetch distance for ${farmer.farmerPostalCode}`, err);
+              return { ...farmer, distance: null };
+            }
+          })
+        );
+  
+        // Step 3: Sort by distance
+        const sortedFarmers = farmerDistances.sort((a, b) => {
+          if (a.distance === null) return 1;
+          if (b.distance === null) return -1;
+          return a.distance - b.distance;
+        });
+  
+        console.log("Sorted Farmers by Distance:", sortedFarmers);
+  
         setProducts(data);
         setLoading(false);
       } catch (err: unknown) {
@@ -46,9 +88,10 @@ const ProductsPage: React.FC = () => {
         setLoading(false);
       }
     };
-
+  
     fetchProducts();
   }, [token]);
+  
 
   const handleAddToWishlist = (product: IProduct) => {
     dispatch(addToWishlist(product));
