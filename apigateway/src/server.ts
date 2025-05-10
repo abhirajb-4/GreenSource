@@ -75,6 +75,15 @@ app.use(
     changeOrigin: true,
   })
 );
+app.use(
+  "/api/admindata",
+  authenticateMultipleRoles(["admin", "farmer", "consumer", "delivery_agent"]),
+  createProxyMiddleware({
+    target: "http://localhost:3810", // 3809
+    changeOrigin: true,
+  })
+);
+
 
 app.listen(3800, () => { // 3800
   console.log("API Gateway running on port 3800"); // 3800

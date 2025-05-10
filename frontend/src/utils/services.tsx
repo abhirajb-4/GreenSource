@@ -38,8 +38,8 @@ export const createProduct = async (token: string, productData: any) => {
 };
 
 export const getFarmerProducts = async (token: string, email: string) => {
-  console.log("email", email);
-  console.log("token", token);
+  //console.log("email", email);
+  //console.log("token", token);
   const response = await axios.get(
     `http://localhost:3800/api/farmers/api/farmers/${email}/get/products`,
     {
@@ -58,7 +58,7 @@ export const addToCartService = async (
   email: string
 ) => {
   try {
-    console.log(token, email, productId);
+    //console.log(token, email, productId);
     const productData = { productId: productId, quantity: 1 };
     const response = await axios.post(
       `http://localhost:3800/api/customers/api/customers/${email}/cart`,
@@ -85,7 +85,7 @@ export const addToWishlistService = async (
   email: string
 ) => {
   try {
-    console.log(token, email, productId);
+    //console.log(token, email, productId);
     const productData = { productId: productId };
     const response = await axios.post(
       `http://localhost:3800/api/customers/api/customers/${email}/wishlist`,
@@ -203,7 +203,7 @@ export const  createOrder = async (
   token: string,
   orderData: Omit<IOrder, "_id">
 ) => {
-  console.log("orderData", orderData);
+  //console.log("orderData", orderData);
   try {
     const response = await axios.post(
       `http://localhost:3800/api/orders/api/orders`,

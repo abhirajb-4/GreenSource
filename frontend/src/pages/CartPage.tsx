@@ -11,6 +11,7 @@ import { selectAuth } from "../store/slices/authSlice";
 import axios from "axios";
 import { Address } from "../types/Customer";
 import { IOrder, OrderStatus } from "../types/Order";
+import toast from "react-hot-toast";
 
 
 interface ICartItem {
@@ -32,6 +33,7 @@ const CartPage: React.FC = () => {
   const navigate = useNavigate();
   const { token, user } = useSelector(selectAuth);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [invalidItems, setInvalidItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -106,7 +108,10 @@ const CartPage: React.FC = () => {
       const validCartItems = cartItemsWithDetails.filter(
         (item): item is CartItem => item !== null
       );
+      
       setCartItems(validCartItems || []);
+      console.log('Cart items');
+      console.log(cartItems);
     } catch (error) {
       setError("Failed to fetch cart items");
       console.error("Error fetching cart items:", error);
@@ -194,6 +199,8 @@ const CartPage: React.FC = () => {
       setError("Please select a delivery address");
       return;
     }
+    
+    
     try {
       setLoading(true);
 
@@ -208,6 +215,27 @@ const CartPage: React.FC = () => {
 
   // Loop through each group and create order
   for (const [farmerId, items] of Object.entries(groupedByFarmer)) {
+    
+    // Check if any item doesn't meet the minimum quantity
+    const invalidItem = items.find(item => item.minQuantityToOrder > item.quantity);    
+    if (invalidItem) {
+      //complete the code
+      setInvalidItems(prev => [...prev, invalidItem]);
+      alert(`You must order at least ${invalidItem.minQuantityToOrder} of ${invalidItem.name}`);
+      toast.error(`Minimum quantity required to order is ${invalidItem.minQuantityToOrder} for ${invalidItem.name}`, {
+        position: "bottom-right",
+        duration: 3800,
+        style: {
+          fontSize: '1.2rem',
+          padding: '16px',
+          minWidth: '300px'
+        }
+      });
+      navigate("/consumer/cart");
+      return; // Skip this farmer group
+    }
+    
+
     const orderItems = items.map((item) => ({
       productId: item._id,
       quantity: item.quantity,
@@ -233,8 +261,7 @@ const CartPage: React.FC = () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    console.log('order data ');
-    console.log(orderData);
+
     const orderResponse = await createOrder(token!, orderData);
     const orderId = orderResponse.data._id;
     // Add order ID to customer's orders
@@ -247,7 +274,6 @@ const CartPage: React.FC = () => {
         },
       }
     );
-
   }
 
       
@@ -263,6 +289,7 @@ const CartPage: React.FC = () => {
       );
 
       setCartItems([]);
+      // setCartItems(invalidItems);
       setError("");
       navigate("/consumer/orders");
     } catch (error: any) {

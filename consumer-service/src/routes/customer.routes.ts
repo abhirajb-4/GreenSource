@@ -20,6 +20,7 @@ router.post("/:email/orders/:orderId/cancel", customerController.cancelOrder);
 router.get("/:email/cart", customerController.getCart);
 router.post("/:email/cart", customerController.addToCart);
 router.delete("/:email/cart", customerController.removeFromCart);
+router.delete("/:email/cart/:id", customerController.removeFromCartByid);
 router.put("/:email/cart/:productId", customerController.updateCart);
 router.delete(
   "/:email/cart/:productId",

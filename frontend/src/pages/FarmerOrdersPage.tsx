@@ -117,6 +117,17 @@ export default function FarmerOrdersPage() {
       await axios.put(
         `http://localhost:3809/agents/${deliveryData.deliveryAgentId}/orderCount/increase`
       );
+      const commision = deliveryData.orderPrice * 0.05;
+      const adminData = {
+        amountReceived:commision,
+        orderId:deliveryData.orderId,
+      }
+      console.log('admin data', adminData);
+       await axios.post(
+          "http://localhost:3810/api/admindata/earnings", 
+          adminData, 
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
       return true;
     }
   };
@@ -174,6 +185,8 @@ export default function FarmerOrdersPage() {
     const consumerAddressData = consumerDetailsRes.data.data.addresses[0];
     const consumerAddress = formatAddress(consumerAddressData);
     const consumerPhoneNumber = consumerDetailsRes.data.data.phone;
+    console.log('delivery agents', deliveryAgentsRes.data);
+    
 
     const agentId = deliveryAgentsRes.data?.[0]?._id;
 

@@ -197,6 +197,17 @@ export class CustomerService {
     }
     return customer;
   }
+  async removeFromCartByid (email: string, id:string): Promise<Customer> {
+    const customer = await CustomerModel.findOneAndUpdate(
+      { email: email },
+      { $set: { cart: [] } },
+      { new: true }
+    );
+    if (!customer) {
+      throw new AppError(404, "Customer not found");
+    }
+    return customer;
+  }
 
   async addOrder(email: string, orderId: string): Promise<Customer> {
     const customer = await CustomerModel.findOneAndUpdate(

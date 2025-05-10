@@ -237,6 +237,17 @@ export class CustomerController {
       next(error);
     }
   };
+  removeFromCartByid = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const customer = await this.customerService.removeFromCartByid(
+        req.params.email,
+        req.params.id
+      );
+      res.json({ success: true, data: customer });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   getWishlist = async (req: Request, res: Response, next: NextFunction) => {
     try {
