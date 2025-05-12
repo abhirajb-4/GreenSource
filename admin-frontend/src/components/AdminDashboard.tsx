@@ -11,6 +11,7 @@ import {
   ChevronRight,
   LayoutDashboard,
   PackageCheck,
+  DollarSign,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -69,6 +70,11 @@ const AdminDashboard = ({ children }: { children: React.ReactNode }) => {
       icon: <Activity className="w-5 h-5" />,
       label: "Analytics",
       path: "/admin/analytics",
+    },
+    {
+      icon: <DollarSign className="w-5 h-5" />,
+      label: "Earnings",
+      path: "/admin/earnings",
     },
     // {
     //   icon: <Settings className="w-5 h-5" />,

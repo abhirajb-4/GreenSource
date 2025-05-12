@@ -7,6 +7,7 @@ import { selectAuth } from "../store/slices/authSlice";
 import { Frown, Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../store/slices/wishlistSlice";
+import axios from "axios";
 
 const ProductsPage: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -14,23 +15,98 @@ const ProductsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { token } = useSelector(selectAuth);
+  const { token,user } = useSelector(selectAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts(token || "");
-        setProducts(data);
-        setLoading(false);
-      } catch (err: unknown) {
-        setError(`Failed to fetch products ${err}`);
-        setLoading(false);
-      }
-    };
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+const fetchProducts = async () => {
+  try {
+    const allData = await getProducts(token || "");
+
+    const userDataResponse = await axios.get(
+      `http://localhost:3800/api/customers/api/customers/${user.email}/postalcode`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const userPincode = userDataResponse.data.data;
+    console.log("USER PINCODE = ", userPincode);
+
+    const data = allData.filter(
+      (item: { quantityAvailable: number }) => item.quantityAvailable > 0
+    );
+
+    const uniqueFarmersMap = new Map<string, string>();
+    data.forEach((item: any) => {
+      if (!uniqueFarmersMap.has(item.farmerId)) {
+        uniqueFarmersMap.set(item.farmerId, item.farmerPostalCode);
+      }
+    });
+
+    const uniqueFarmers = Array.from(uniqueFarmersMap, ([farmerId, farmerPostalCode]) => ({
+      farmerId,
+      farmerPostalCode,
+    }));
+
+    const API_KEY = "d5668f60-29d8-11f0-b664-7566d958dde4";
+    const country = "in";
+
+    const farmerDistances: { farmerId: string; farmerPostalCode: string; distance: number | null }[] = [];
+
+    for (const farmer of uniqueFarmers) {
+      const url = `https://app.zipcodebase.com/api/v1/distance?apikey=${API_KEY}&code=${userPincode}&compare=${farmer.farmerPostalCode}&country=${country}`;
+      try {
+        const res = await fetch(url);
+        const result = await res.json();
+
+        const distance = result.results[farmer.farmerPostalCode] ?? null;
+        
+        farmerDistances.push({ ...farmer, distance });
+      } catch (err) {
+        console.error(`Failed to fetch distance for ${farmer.farmerPostalCode}`, err);
+        farmerDistances.push({ ...farmer, distance: null });
+      }
+      await sleep(500); // Delay of 500ms between each request
+    }
+
+    const sortedFarmers = farmerDistances.sort((a, b) => {
+      if (a.distance === null) return 1;
+      if (b.distance === null) return -1;
+      return a.distance - b.distance;
+    });
+
+    const sortedProducts: any[] = [];
+    sortedFarmers.forEach((farmer) => {
+      const productsByFarmer = data.filter(
+        (item: any) => item.farmerId === farmer.farmerId
+      );
+      sortedProducts.push(...productsByFarmer);
+    });
+
+    const addedFarmerIds = new Set(sortedFarmers.map((f) => f.farmerId));
+    const remainingProducts = data.filter(
+      (item: any) => !addedFarmerIds.has(item.farmerId)
+    );
+    sortedProducts.push(...remainingProducts);
+
+    setProducts(sortedProducts);
+    setLoading(false);
+  } catch (err: unknown) {
+    setError(`Failed to fetch products ${err}`);
+    setLoading(false);
+  }
+};
+
+  
     fetchProducts();
   }, [token]);
+  
 
   const handleAddToWishlist = (product: IProduct) => {
     dispatch(addToWishlist(product));
@@ -59,8 +135,8 @@ const ProductsPage: React.FC = () => {
   }
 
   return (
-    <div className="flex-grow p-4 md:p-6 lg:p-8">
-      <div className="mb-6 space-y-4 md:space-y-0 md:flex md:items-center md:space-x-4">
+    <div className="flex-grow p-4 md:p-6 lg:p-8 ">
+      <div className="mb-6 space-y-4 md:space-y-0 md:flex md:items-center md:space-x-4 ">
         <div className="relative flex-grow md:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-5" />
           <input

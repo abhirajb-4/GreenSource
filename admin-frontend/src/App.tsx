@@ -16,6 +16,7 @@ import AdminFarmerOrdersPage from "./components/AdminFarmerOrdersPage";
 import AdminConsumerOrdersPage from "./components/AdminConsumerOrdersPage";
 import AdminOrdersPage from "./components/AdminOrdersPage";
 import AdminAdminsView from "./components/AdminAdminsView";
+import AdminEarnings from "./components/AdminEarnings";
 
 function App() {
   return (
@@ -85,6 +86,14 @@ function App() {
             element={
               <AdminDashboard>
                 <AdminSettings />
+              </AdminDashboard>
+            }
+          />
+          <Route
+            path="/admin/earnings"
+            element={
+              <AdminDashboard>
+                <AdminEarnings />
               </AdminDashboard>
             }
           />

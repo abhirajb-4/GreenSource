@@ -252,7 +252,7 @@ const CartPage: React.FC = () => {
       totalAmount,
       shippingAddress: {
         street: selectedAddress.street,
-        city: selectedAddress.city,
+        district: selectedAddress.district,
         state: selectedAddress.state,
         postal_code: selectedAddress.postal_code,
         country: selectedAddress.country,
@@ -328,7 +328,7 @@ const CartPage: React.FC = () => {
             >
               <p className="font-semibold">{address.street}</p>
               <p className="text-gray-600">
-                {address.city}, {address.state} {address.postal_code}
+                {address.district}, {address.state} {address.postal_code}
               </p>
               <p className="text-gray-600">{address.country}</p>
               {address.isDefault && (
@@ -435,7 +435,7 @@ const CartPage: React.FC = () => {
               <button
                 className={`bg-green-600 text-white px-6 py-3 rounded-lg transition-colors ${
                   loading || stockErrors.length > 0
-                    ? "opacity-50 cursor-not-allowed"
+                    ? "opadistrict-50 cursor-not-allowed"
                     : "hover:bg-green-700"
                 }`}
                 onClick={handleCheckout}

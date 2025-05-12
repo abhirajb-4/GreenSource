@@ -5,7 +5,7 @@ export interface IDeliveryAgent {
   email: string;
   phoneNumber: string;
   orderCount: number;
-  serviceLocations: string[]; // Array of city names
+  serviceLocations: string[]; // Array of district names
   deliveredOrders: string[]; // Array of order IDs
   isAvailable: boolean;
   idProof: {

@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
                   <span className="text-green-400">Green</span>
                   <span className="text-blue-300">Source</span>
                 </span>{" "}
-                <span className="block mt-4 text-white opacity-90">Admin Portal</span>
+                <span className="block mt-4 text-white opadistrict-90">Admin Portal</span>
               </h1>
               <button
                 className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-12 py-4 rounded-full font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
@@ -77,22 +77,22 @@ const HomePage: React.FC = () => {
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Active Users</h3>
                 <p className="text-3xl font-bold">1,234</p>
-                <p className="text-sm opacity-80">+12% from last month</p>
+                <p className="text-sm opadistrict-80">+12% from last month</p>
               </div>
               <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Total Sales</h3>
                 <p className="text-3xl font-bold">$45,678</p>
-                <p className="text-sm opacity-80">Last 30 days</p>
+                <p className="text-sm opadistrict-80">Last 30 days</p>
               </div>
               <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Active Listings</h3>
                 <p className="text-3xl font-bold">567</p>
-                <p className="text-sm opacity-80">Across all categories</p>
+                <p className="text-sm opadistrict-80">Across all categories</p>
               </div>
               <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Support Tickets</h3>
                 <p className="text-3xl font-bold">23</p>
-                <p className="text-sm opacity-80">Pending resolution</p>
+                <p className="text-sm opadistrict-80">Pending resolution</p>
               </div>
             </div>
           </div>

@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
                   <span className="text-green-400">Green</span>
                   <span className="text-blue-300">Source</span>
                 </span>{" "}
-                <span className="block mt-4 text-white opacity-90">Delivery Portal</span>
+                <span className="block mt-4 text-white opadistrict-90">Delivery Portal</span>
               </h1>
               <button
                 className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-12 py-4 rounded-full font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
@@ -77,22 +77,22 @@ const HomePage: React.FC = () => {
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Pending Deliveries</h3>
                 <p className="text-3xl font-bold">15</p>
-                <p className="text-sm opacity-80">Awaiting pickup</p>
+                <p className="text-sm opadistrict-80">Awaiting pickup</p>
               </div>
               <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Active Deliveries</h3>
                 <p className="text-3xl font-bold">8</p>
-                <p className="text-sm opacity-80">In transit</p>
+                <p className="text-sm opadistrict-80">In transit</p>
               </div>
               <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Completed Today</h3>
                 <p className="text-3xl font-bold">12</p>
-                <p className="text-sm opacity-80">Successfully delivered</p>
+                <p className="text-sm opadistrict-80">Successfully delivered</p>
               </div>
               <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Average Rating</h3>
                 <p className="text-3xl font-bold">4.8</p>
-                <p className="text-sm opacity-80">Based on customer feedback</p>
+                <p className="text-sm opadistrict-80">Based on customer feedback</p>
               </div>
             </div>
           </div>

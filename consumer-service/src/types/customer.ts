@@ -2,7 +2,7 @@ export interface Address {
   id: string;
   customerId: string;
   street: string;
-  city: string;
+  district: string;
   state: string;
   country: string;
   postal_code: string;

@@ -47,8 +47,7 @@ export default function AdminFarmersView() {
           },
         }
       );
-      console.log("response");
-      console.log(response.data);
+      
       const farmersWithDetails = await Promise.all(
         response.data.map(async (farmer: Farmer) => {
           const [productsRes, ordersRes] = await Promise.all([
@@ -224,12 +223,12 @@ export default function AdminFarmersView() {
                       {farmer.is_verified ? "Verified" : "Not Verified"}
                     </span>
                   </p>
-                  <p className="flex items-center gap-2">
+                  {/* <p className="flex items-center gap-2">
                     <span className="font-medium">Total Earnings:</span>
                     <span className="text-green-600 font-medium">
                     ₹{calculateTotalEarnings(farmer.orders || []).toFixed(2)}
                     </span>
-                  </p>
+                  </p> */}
                 </div>
               </div>
 

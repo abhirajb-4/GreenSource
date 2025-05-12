@@ -55,22 +55,18 @@ const fetchProducts = async () => {
     }));
 
     const API_KEY = "d5668f60-29d8-11f0-b664-7566d958dde4";
-    const COUNTRY = "in";
+    const country = "in";
 
     const farmerDistances: { farmerId: string; farmerPostalCode: string; distance: number | null }[] = [];
 
     for (const farmer of uniqueFarmers) {
-      const url = `https://app.zipcodebase.com/api/v1/distance?apikey=${API_KEY}&code=${userPincode}&compare=${farmer.farmerPostalCode}&country=${COUNTRY}`;
+      const url = `https://app.zipcodebase.com/api/v1/distance?apikey=${API_KEY}&code=${userPincode}&compare=${farmer.farmerPostalCode}&country=${country}`;
       try {
         const res = await fetch(url);
         const result = await res.json();
-        console.log('URL');
-        console.log(url);
-        console.log('RESPONSE');
-        console.log(result);
+
         const distance = result.results[farmer.farmerPostalCode] ?? null;
-        console.log('DISTANCE');
-        console.log(distance);
+        
         farmerDistances.push({ ...farmer, distance });
       } catch (err) {
         console.error(`Failed to fetch distance for ${farmer.farmerPostalCode}`, err);
