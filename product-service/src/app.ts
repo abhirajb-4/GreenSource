@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import productRoutes from "./routes/product.route";
 import connectDB from "./utils/db";
 import cors from "cors";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 
@@ -28,7 +30,7 @@ app.use("/", productRoutes);
 connectDB();
 
 // Start server
-const PORT = process.env.PORT || 3802;
+const PORT = process.env.PORT || 3807;
 app.listen(PORT, () => {
   console.log(`Product service is running on port ${PORT}`);
 });

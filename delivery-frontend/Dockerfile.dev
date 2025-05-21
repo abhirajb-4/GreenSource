@@ -1,0 +1,20 @@
+# Base image
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json/yarn.lock
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application
+COPY . .
+
+# Expose Vite default dev port
+EXPOSE 3802
+
+# Start the development server
+CMD ["npm", "run", "dev"]

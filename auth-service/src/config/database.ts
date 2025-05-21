@@ -1,8 +1,10 @@
 // src/config/database.ts
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Use MongoDB Atlas connection string
-const dbURI = 'mongodb://127.0.0.1:27017/auth-userdb';
+const dbURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/auth-userdb";
 
 const connectDB = async () => {
     try {
