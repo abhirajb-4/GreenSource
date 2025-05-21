@@ -1,6 +1,6 @@
 # Dockerfile for React + Vite
 FROM node:18-alpine
-WORKDIR /
+WORKDIR /app
 
 # Install dependencies
 ENV NODE_ENV=development
