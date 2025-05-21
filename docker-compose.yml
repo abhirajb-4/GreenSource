@@ -1,0 +1,221 @@
+version: "3.8"
+
+services:
+  # ---------- MongoDB ----------
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - greensource-net
+
+  # ---------- Front‑Ends (Dev) ----------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Keep node_modules isolated inside container
+    ports:
+      - "3801:3801"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  # For hot reload in Docker
+      - HOST=0.0.0.0              # Make React listen on all interfaces
+      - PORT=3801                 # Set React port explicitly
+    networks:
+      - greensource-net
+
+  admin-frontend:
+    build:
+      context: ./admin-frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./admin-frontend:/app
+      - /app/node_modules
+    ports:
+      - "3803:3803"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+      - PORT=3803
+    networks:
+      - greensource-net
+
+  delivery-frontend:
+    build:
+      context: ./delivery-frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./delivery-frontend:/app
+      - /app/node_modules
+    ports:
+      - "3802:3802"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+      - PORT=3802
+    networks:
+      - greensource-net
+
+  # ---------- API Gateway (Dev) ----------
+  apigateway:
+    build:
+      context: ./apigateway
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./apigateway:/app
+      - /app/node_modules
+    ports:
+      - "3800:3800"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+    networks:
+      - greensource-net
+
+  # ---------- Microservices (Dev) ----------
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    ports:
+      - "3804:3804"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/auth-userdb
+    networks:
+      - greensource-net
+
+  consumer-service:
+    build:
+      context: ./consumer-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./consumer-service:/app
+      - /app/node_modules
+    ports:
+      - "3806:3806"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/customers
+    networks:
+      - greensource-net
+
+  farmer-service:
+    build:
+      context: ./farmer-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./farmer-service:/app
+      - /app/node_modules
+    ports:
+      - "3805:3805"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/Farmers
+    networks:
+      - greensource-net
+
+  delivery-service:
+    build:
+      context: ./delivery-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./delivery-service:/app
+      - /app/node_modules
+    ports:
+      - "3809:3809"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/delivery
+    networks:
+      - greensource-net
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./product-service:/app
+      - /app/node_modules
+    ports:
+      - "3807:3807"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/Products
+    networks:
+      - greensource-net
+
+  order-payment-service:
+    build:
+      context: ./order-payment-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./order-payment-service:/app
+      - /app/node_modules
+    ports:
+      - "3808:3808"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/orders
+    networks:
+      - greensource-net
+
+  admin-service:
+    build:
+      context: ./admin-service
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./admin-service:/app
+      - /app/node_modules
+    ports:
+      - "3810:3810"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/admin
+    networks:
+      - greensource-net
+
+volumes:
+  mongo-data:
+
+networks:
+  greensource-net:
+    driver: bridge

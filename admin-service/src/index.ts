@@ -2,12 +2,15 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose"; // Import mongoose
 import adminRoutes from "./routes/admin.routes";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
-
+const dbURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/admin";
 // Connect to MongoDB directly
 mongoose
-  .connect("mongodb://127.0.0.1:27017/admin") // Replace with your DB URL
+  .connect(dbURI) // Replace with your DB URL
   .then(() => {
     console.log("MongoDB connected");
   })

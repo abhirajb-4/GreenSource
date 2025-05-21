@@ -4,6 +4,9 @@ import { connectDatabase } from "./config/database";
 import customerRoutes from "./routes/customer.routes";
 // import { errorHandler } from "./middleware/error.middleware";
 import cors from "cors";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 // Load environment variables
 
@@ -39,7 +42,7 @@ app.use((req, res, next) => {
 // Error handling middleware (should be last)
 // app.use(errorHandler);
 // Start server
-const PORT = process.env.PORT || 3801;
+const PORT = process.env.PORT || 3806;
 app.listen(PORT, () => {
   console.log(`Customer service running on port ${PORT}`);
 });
