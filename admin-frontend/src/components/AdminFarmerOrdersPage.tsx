@@ -18,7 +18,7 @@ interface Order {
   createdAt: string;
   shippingAddress: {
     street: string;
-    city: string;
+    district: string;
     state: string;
     postal_code: string;
     country: string;
@@ -156,7 +156,7 @@ export default function AdminFarmerOrdersPage() {
                         {order.shippingAddress.street}
                       </p>
                       <p className="text-gray-600">
-                        {order.shippingAddress.city},{" "}
+                        {order.shippingAddress.district},{" "}
                         {order.shippingAddress.state}{" "}
                         {order.shippingAddress.postal_code}
                       </p>

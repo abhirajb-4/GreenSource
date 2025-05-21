@@ -21,7 +21,7 @@ interface IDeliveryAgent {
   email: string;
   phoneNumber: string;
   orderCount: number;
-  serviceLocations: string[]; // Array of city names
+  serviceLocations: string[]; // Array of district names
   deliveredOrders: string[]; // Array of order IDs
   isAvailable: boolean;
   idProof: {
@@ -220,7 +220,7 @@ export default function OrderDetailsPage() {
                 <p className="font-medium">Delivery Address</p>
                 <p className="text-gray-600">{order.shippingAddress.street}</p>
                 <p className="text-gray-600">
-                  {order.shippingAddress.city}, {order.shippingAddress.state}{" "}
+                  {order.shippingAddress.district}, {order.shippingAddress.state}{" "}
                   {order.shippingAddress.postal_code}
                 </p>
               </div>

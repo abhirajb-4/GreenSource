@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const AddressSchema = new Schema({
     id: { type: String, default: uuidv4, unique: true, required: true },
     street: { type: String, required: true },
-    city: { type: String, required: true },
+    district: { type: String, required: true },
     state: { type: String, required: true },
     postal_code: { type: String, required: true },
     country: { type: String, required: true },

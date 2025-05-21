@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
                   <span className="text-green-400 hover:text-green-300 transition-colors duration-300 animate-pulse">Green</span>
                   <span className="text-blue-300 hover:text-blue-200 transition-colors duration-300 animate-pulse">Source</span>
                 </span>{" "}
-                <span className="block mt-4 text-white opacity-90">Marketplace</span>
+                <span className="block mt-4 text-white opadistrict-90">Marketplace</span>
               </h1>
               <button
                 className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-12 py-4 rounded-full font-semibold hover:from-green-600 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-transparent hover:border-white"
@@ -104,12 +104,12 @@ const HomePage: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-16">
               <div className="text-white md:w-1/2">
                 <h2 className="text-4xl font-bold mb-4">Are you a farmer?</h2>
-                <p className="text-lg opacity-90 mb-6 leading-relaxed">
+                <p className="text-lg opadistrict-90 mb-6 leading-relaxed">
                   Join our platform and start selling your produce directly to consumers. 
                   Enjoy better profits, transparent pricing, and a direct connection with your customers.
                 </p>
                 <button
-                  className="bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105 shadow-lg"
+                  className="bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-opadistrict-90 transition-all transform hover:scale-105 shadow-lg"
                   onClick={handleGetStarted}
                 >
                   Register as Farmer

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 interface Address {
   _id?: string;
   street: string;
-  city: string;
+  district: string;
   state: string;
   country: string;
   postal_code: string;
@@ -35,7 +35,7 @@ const FarmerProfile: React.FC = () => {
   const [addressesData, setAddressesData] = useState<Address[]>([]);
   const [newAddress, setNewAddress] = useState<Address>({
     street: '',
-    city: '',
+    district: '',
     state: '',
     country: '',
     postal_code: '',
@@ -110,7 +110,7 @@ const FarmerProfile: React.FC = () => {
       setIsAddingAddress(false);
       setNewAddress({
         street: '',
-        city: '',
+        district: '',
         state: '',
         country: '',
         postal_code: '',
@@ -250,7 +250,7 @@ const FarmerProfile: React.FC = () => {
                     <div className="flex justify-between items-start">
                       <div className="space-y-1">
                         <p className="font-bold text-gray-900">{address.street}</p>
-                        <p className="text-gray-800 font-medium">{address.city}, {address.state}</p>
+                        <p className="text-gray-800 font-medium">{address.district}, {address.state}</p>
                         <p className="text-gray-800 font-medium">{address.country}, {address.postal_code}</p>
                         {address.is_primary && (
                           <span className="inline-block mt-1 px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">
@@ -282,11 +282,11 @@ const FarmerProfile: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-gray-900 mb-1">City</label>
+                      <label className="block text-sm font-bold text-gray-900 mb-1">district</label>
                       <input
                         className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        value={newAddress.city}
-                        onChange={(e) => setNewAddress({...newAddress, city: e.target.value})}
+                        value={newAddress.district}
+                        onChange={(e) => setNewAddress({...newAddress, district: e.target.value})}
                       />
                     </div>
                     <div>
@@ -298,7 +298,7 @@ const FarmerProfile: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-gray-900 mb-1">Country</label>
+                      <label className="block text-sm font-bold text-gray-900 mb-1">country</label>
                       <input
                         className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         value={newAddress.country}

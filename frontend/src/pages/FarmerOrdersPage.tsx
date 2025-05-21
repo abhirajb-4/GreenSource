@@ -185,10 +185,28 @@ export default function FarmerOrdersPage() {
     const consumerAddressData = consumerDetailsRes.data.data.addresses[0];
     const consumerAddress = formatAddress(consumerAddressData);
     const consumerPhoneNumber = consumerDetailsRes.data.data.phone;
-    console.log('delivery agents', deliveryAgentsRes.data);
-    
 
-    const agentId = deliveryAgentsRes.data?.[0]?._id;
+    // Calculate total order weight
+    const totalWeight = order.items.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Filter available agents based on weight
+    const availableAgents = deliveryAgentsRes.data;
+    let suitableAgents = [];
+
+    if (totalWeight <= 30) {
+      suitableAgents = availableAgents.filter((agent: { vehicle: { type: string } }) => agent.vehicle.type === "bike");
+    } else if (totalWeight > 30 && totalWeight <= 300) {
+      suitableAgents = availableAgents.filter((agent: { vehicle: { type: string } }) => agent.vehicle.type === "auto");
+    } else if (totalWeight > 300 && totalWeight <= 1000) {
+      suitableAgents = availableAgents.filter((agent: { vehicle: { type: string } }) => agent.vehicle.type === "mini-truck");
+    } else if (totalWeight > 1000 && totalWeight <= 5000) {
+      suitableAgents = availableAgents.filter((agent: { vehicle: { type: string } }) => agent.vehicle.type === "medium-truck");
+    } else {
+      suitableAgents = availableAgents.filter((agent: { vehicle: { type: string } }) => agent.vehicle.type === "heavy-truck");
+    }
+
+    // Select the first available agent from suitable agents
+    const agentId = suitableAgents[0]?._id;
 
     return {
       orderId: order._id.toString(),
@@ -205,7 +223,7 @@ export default function FarmerOrdersPage() {
   };
 
   const formatAddress = (addressData: any) => {
-    return `${addressData.street}, ${addressData.city}, ${addressData.state}, ${addressData.country}, ${addressData.postal_code}`;
+    return `${addressData.street}, ${addressData.district}, ${addressData.state}, ${addressData.country}, ${addressData.postal_code}`;
   };
 
   // Order Card Component

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 interface Address {
   _id?: string;
   street: string;
-  city: string;
+  district: string;
   state: string;
   country: string;
   postal_code: string;
@@ -34,7 +34,7 @@ const ConsumerProfilePage: React.FC = () => {
   });
   const [newAddress, setNewAddress] = useState<Address>({
     street: "",
-    city: "",
+    district: "",
     state: "",
     country: "",
     postal_code: "",
@@ -104,7 +104,7 @@ const ConsumerProfilePage: React.FC = () => {
       setIsAddingAddress(false);
       setNewAddress({
         street: "",
-        city: "",
+        district: "",
         state: "",
         country: "",
         postal_code: "",
@@ -276,7 +276,7 @@ const ConsumerProfilePage: React.FC = () => {
                           {address.street}
                         </p>
                         <p className="text-gray-800 font-medium">
-                          {address.city}, {address.state}
+                          {address.district}, {address.state}
                         </p>
                         <p className="text-gray-800 font-medium">
                           {address.country}, {address.postal_code}
@@ -321,13 +321,13 @@ const ConsumerProfilePage: React.FC = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-gray-900 mb-1">
-                        City
+                        district
                       </label>
                       <input
                         className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        value={newAddress.city}
+                        value={newAddress.district}
                         onChange={(e) =>
-                          setNewAddress({ ...newAddress, city: e.target.value })
+                          setNewAddress({ ...newAddress, district: e.target.value })
                         }
                       />
                     </div>
@@ -348,7 +348,7 @@ const ConsumerProfilePage: React.FC = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-gray-900 mb-1">
-                        Country
+                        country
                       </label>
                       <input
                         className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"

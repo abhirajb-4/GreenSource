@@ -7,7 +7,7 @@ export enum OrderStatus {
 
 export interface IShippingAddress {
   street: string;
-  city: string;
+  district: string;
   state: string;
   postal_code: string;
   country: string;

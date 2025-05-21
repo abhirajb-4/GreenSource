@@ -24,7 +24,7 @@ const orderSchema = new Schema<IOrder>({
   totalAmount: { type: Number, required: true },
   shippingAddress: {
     street: String,
-    city: String,
+    district: String,
     state: String,
     postal_code: String,
     country: String,

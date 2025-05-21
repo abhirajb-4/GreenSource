@@ -221,7 +221,7 @@ export default function FarmerProducts() {
       {/* Overlay */}
       {showAddForm && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black bg-opadistrict-50 z-40"
           onClick={() => setShowAddForm(false)}
         />
       )}

@@ -133,8 +133,8 @@ export default function AdminOverview() {
           color="purple"
         />
       </div>
-
-      <div className="bg-white p-6 rounded-lg shadow mb-8">
+      
+      {/* <div className="bg-white p-6 rounded-lg shadow mb-8">
         <h2 className="text-xl font-semibold mb-4">Monthly Income</h2>
         <div className="w-full h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -154,9 +154,11 @@ export default function AdminOverview() {
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </div> */}
 
-      <div className="bg-white p-6 rounded-lg shadow">
+
+
+      {/* <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Locations We Serve</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {locations.map((location, index) => (
@@ -169,7 +171,7 @@ export default function AdminOverview() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
