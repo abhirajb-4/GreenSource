@@ -4,7 +4,6 @@ import Home from "./pages/HomePage";
 import Login from "./pages/Login";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import Signup from "./pages/Signup";
 import ConsumerDashboard from "./pages/ConsumerDashboard";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import ProductsPage from "./pages/ProductsPage";
@@ -21,6 +20,10 @@ import FarmerEarnings from "./pages/FarmerEarnings";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SignupSelection from "./pages/Signup/SignupSelection";
+import FarmerSignup from "./pages/Signup/FarmerSignup";
+import ConsumerSignup from "./pages/Signup/ConsumerSignup";
+import Signup from "./components/Signup";
 
 
 function App() {
@@ -32,7 +35,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
+          <Route path="/register" element={<SignupSelection />} />
+          <Route path="/signup/farmer" element={<FarmerSignup />} />
+          <Route path="/signup/consumer" element={<ConsumerSignup />} />
           <Route
             path="/consumer/products"
             element={
