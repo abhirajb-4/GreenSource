@@ -36,7 +36,7 @@ const ConsumerDashboard = ({ children }: { children: React.ReactNode }) => {
       }
 
       try {
-        const response = await axios({
+        await axios({
           method: "GET",
           url: `http://localhost:3800/api/customers/api/customers/${user.email}`,
           headers: {
